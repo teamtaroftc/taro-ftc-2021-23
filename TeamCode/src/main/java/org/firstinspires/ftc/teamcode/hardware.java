@@ -40,7 +40,7 @@ public class hardware {
         // Connect Servo
         claw = hardwareMap.get(Servo.class, "claw");
 
-        // Set Motor Directions
+        // Set Motor Direction
         fldrive.setDirection(DcMotor.Direction.FORWARD);
         frdrive.setDirection(DcMotor.Direction.REVERSE);
         brdrive.setDirection(DcMotor.Direction.REVERSE);
