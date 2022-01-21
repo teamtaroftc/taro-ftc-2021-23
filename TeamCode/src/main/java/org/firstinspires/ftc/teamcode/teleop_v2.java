@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -18,6 +19,9 @@ public class teleop_v2 extends LinearOpMode
 
     //name motor variables
     private DcMotor fldrive, frdrive, brdrive, bldrive, lslides, carousel;
+
+    // declare servo
+    Servo claw;
 
     @Override
     public void runOpMode()
@@ -33,12 +37,16 @@ public class teleop_v2 extends LinearOpMode
         lslides = hardwareMap.get(DcMotor.class, "lslides");
         carousel = hardwareMap.get(DcMotor.class, "carousel");
 
+        // map the servo to the servo on the robot
+        claw = hardwareMap.servo.get("claw");
+
         //set direction of motors
         fldrive.setDirection(DcMotor.Direction.FORWARD);
         frdrive.setDirection(DcMotor.Direction.REVERSE);
         brdrive.setDirection(DcMotor.Direction.REVERSE);
         bldrive.setDirection(DcMotor.Direction.FORWARD);
         lslides.setDirection(DcMotor.Direction.FORWARD);
+        claw.setDirection(Servo.Direction.FORWARD);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -80,6 +88,8 @@ public class teleop_v2 extends LinearOpMode
             bldrive.setPower(Range.clip(bl, -1.0, 1.0));
             lslides.setPower(Range.clip(ls, -0.5, 0.5));
 
+            // set servo positions (180 degreees)
+
             if (cfor) {
                 carousel.setPower(0.5);
             }
@@ -88,10 +98,19 @@ public class teleop_v2 extends LinearOpMode
                 carousel.setPower(-0.5);
             }
 
-            if (gamepad1.x && xControl)
-            {
+            if (gamepad1.x && xControl) {
                 slowmode = !slowmode;
             }
+
+            /*
+            if (gamepad1.y) {
+                // claw.setPower(0.5);
+            }
+
+            if (gamepad1.a) {
+                claw.
+            }
+            */
 
             xControl = !gamepad1.x;
 
