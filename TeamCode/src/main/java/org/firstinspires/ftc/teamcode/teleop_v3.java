@@ -6,23 +6,27 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.robocol.TelemetryMessage;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-// version 1 of taro's driver control code
-// basic drivetrain opmode
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad1;
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 
-@TeleOp(name="teleop_v2", group="Linear Opmode")
-public class teleop_v2 extends LinearOpMode
-{
+@TeleOp(name="teleop_v3", group="Linear Opmode")
+public class teleop_v3 {
+
     private ElapsedTime runtime = new ElapsedTime();
 
     //name motor variables
     private DcMotor fldrive, frdrive, brdrive, bldrive, lslides, carousel;
 
+    // declare servo
+    Servo claw;
+
     @Override
-    public void runOpMode()
-    {
+    public void runOpMode() {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
@@ -34,12 +38,16 @@ public class teleop_v2 extends LinearOpMode
         lslides = hardwareMap.get(DcMotor.class, "lslides");
         carousel = hardwareMap.get(DcMotor.class, "carousel");
 
+        // map the servo to the servo on the robot
+        claw = hardwareMap.servo.get("claw");
+
         //set direction of motors
         fldrive.setDirection(DcMotor.Direction.FORWARD);
         frdrive.setDirection(DcMotor.Direction.REVERSE);
         brdrive.setDirection(DcMotor.Direction.REVERSE);
         bldrive.setDirection(DcMotor.Direction.FORWARD);
         lslides.setDirection(DcMotor.Direction.FORWARD);
+        claw.setDirection(Servo.Direction.FORWARD);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -49,8 +57,7 @@ public class teleop_v2 extends LinearOpMode
         boolean slowmode = false;
         boolean xControl = false;
 
-        while (opModeIsActive())
-        {
+        while (opModeIsActive()) {
             double speed = gamepad1.left_stick_y;
             double turn = -gamepad1.right_stick_x;
             double strafe = -gamepad1.left_stick_x;
@@ -60,14 +67,14 @@ public class teleop_v2 extends LinearOpMode
             boolean cback = gamepad1.left_bumper;
 
             //determine power for each motor
-            double fl = speed+turn+strafe;
-            double fr = speed-turn-strafe;
-            double br = speed-turn+strafe;
-            double bl = speed+turn-strafe;
+            double fl = speed + turn + strafe;
+            double fr = speed - turn - strafe;
+            double br = speed - turn + strafe;
+            double bl = speed + turn - strafe;
             double ls = lsfor - lsback;
 
             // slow mode
-            if (slowmode){
+            if (slowmode) {
                 fl /= 10;
                 fr /= 10;
                 bl /= 10;
@@ -95,16 +102,28 @@ public class teleop_v2 extends LinearOpMode
                 slowmode = !slowmode;
             }
 
+            /*
+            if (gamepad1.y) {
+                // claw.setPower(0.5);
+            }
+
+            if (gamepad1.a) {
+                claw.
+            }
+            */
+
             xControl = !gamepad1.x;
 
             //debug messages for each motor
-            telemetry.addData("fldrive",Double.toString(fldrive.getPower()));
-            telemetry.addData("frdrive",Double.toString(frdrive.getPower()));
-            telemetry.addData("brdrive",Double.toString(brdrive.getPower()));
-            telemetry.addData("bldrive",Double.toString(bldrive.getPower()));
-            telemetry.addData("lslides",Double.toString(lslides.getPower()));
+            telemetry.addData("fldrive", Double.toString(fldrive.getPower()));
+            telemetry.addData("frdrive", Double.toString(frdrive.getPower()));
+            telemetry.addData("brdrive", Double.toString(brdrive.getPower()));
+            telemetry.addData("bldrive", Double.toString(bldrive.getPower()));
+            telemetry.addData("lslides", Double.toString(lslides.getPower()));
 
             telemetry.update();
         }
     }
 }
+
+
