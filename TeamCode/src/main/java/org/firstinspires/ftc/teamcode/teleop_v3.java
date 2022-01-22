@@ -4,21 +4,24 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-// version 2 of taro's driver control code
-// basic drivetrain opmode w/ linear slides and carousels on one gamepad
+// version 3 of taro's driver control code
+// basic drivetrain opmode w/ other components (& servo claw) and split gamepads
 
-@TeleOp(name="teleop_v2", group="Linear Opmode")
-public class teleop_v2 extends LinearOpMode
+@TeleOp(name="teleop_v3", group="Linear Opmode")
+public class teleop_v3 extends LinearOpMode
 {
     private ElapsedTime runtime = new ElapsedTime();
 
     //name motor variables
     private DcMotor fldrive, frdrive, brdrive, bldrive, lslides, carousel;
+    Servo   clawServo;
+    double  clawPosition;
+    double  MIN_POSITION = 0, MAX_POSITION = 1;
 
     @Override
     public void runOpMode()
@@ -54,10 +57,10 @@ public class teleop_v2 extends LinearOpMode
             double speed = gamepad1.left_stick_y;
             double turn = -gamepad1.right_stick_x;
             double strafe = -gamepad1.left_stick_x;
-            double lsfor = gamepad1.right_trigger;
-            double lsback = gamepad1.left_trigger;
-            boolean cfor = gamepad1.right_bumper;
-            boolean cback = gamepad1.left_bumper;
+            double lsfor = gamepad2.right_trigger;
+            double lsback = gamepad2.left_trigger;
+            boolean cfor = gamepad2.right_bumper;
+            boolean cback = gamepad2.left_bumper;
 
             //determine power for each motor
             double fl = speed+turn+strafe;
@@ -72,7 +75,6 @@ public class teleop_v2 extends LinearOpMode
                 fr /= 10;
                 bl /= 10;
                 br /= 10;
-                ls /= 2;
             }
 
             //set power to motors with range of -1 to 1
@@ -82,21 +84,18 @@ public class teleop_v2 extends LinearOpMode
             bldrive.setPower(Range.clip(bl, -1.0, 1.0));
             lslides.setPower(Range.clip(ls, -1.0, 1.0));
 
-            // set servo positions (180 degreees)
+            if (cfor) carousel.setPower(0.5);
 
-            if (cfor) {
-                carousel.setPower(0.5);
-            }
-            else if (cback) {
-                carousel.setPower(-0.5);
-            }
-            else {
-                carousel.setPower(0);
-            }
+            else if (cback) carousel.setPower(-0.5);
 
-            if (gamepad1.x && xControl) {
-                slowmode = !slowmode;
-            }
+            else carousel.setPower(0);            }
+
+            if (gamepad1.x && xControl) slowmode = !slowmode;
+
+            if (gamepad1.dpad_up && clawPosition > MIN_POSITION) clawPosition -= .01;
+
+            // move arm up on B button if not already at the highest position.
+            if (gamepad1.dpad_down && clawPosition < MAX_POSITION) clawPosition += .01;
 
             xControl = !gamepad1.x;
 
