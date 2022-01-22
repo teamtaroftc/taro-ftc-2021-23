@@ -8,8 +8,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-// version 1 of taro's driver control code
-// basic drivetrain opmode
+// version 2 of taro's driver control code
+// basic drivetrain opmode w/ linear slides and carousels on one gamepad
 
 @TeleOp(name="teleop_v2", group="Linear Opmode")
 public class teleop_v2 extends LinearOpMode
@@ -71,6 +71,7 @@ public class teleop_v2 extends LinearOpMode
                 fr /= 10;
                 bl /= 10;
                 br /= 10;
+                ls /= 2;
             }
 
             //set power to motors with range of -1 to 1
@@ -78,14 +79,16 @@ public class teleop_v2 extends LinearOpMode
             frdrive.setPower(Range.clip(fr, -1.0, 1.0));
             brdrive.setPower(Range.clip(br, -1.0, 1.0));
             bldrive.setPower(Range.clip(bl, -1.0, 1.0));
-            lslides.setPower(Range.clip(ls, -0.5, 0.5));
+            lslides.setPower(Range.clip(ls, -1.0, 1.0));
 
             if (cfor) {
                 carousel.setPower(0.5);
             }
-
-            if (cback) {
+            else if (cback) {
                 carousel.setPower(-0.5);
+            }
+            else {
+                carousel.setPower(0);
             }
 
             if (gamepad1.x && xControl)
