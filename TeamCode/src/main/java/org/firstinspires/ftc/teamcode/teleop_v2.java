@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -81,6 +82,8 @@ public class teleop_v2 extends LinearOpMode
             bldrive.setPower(Range.clip(bl, -1.0, 1.0));
             lslides.setPower(Range.clip(ls, -1.0, 1.0));
 
+            // set servo positions (180 degreees)
+
             if (cfor) {
                 carousel.setPower(0.5);
             }
@@ -91,8 +94,7 @@ public class teleop_v2 extends LinearOpMode
                 carousel.setPower(0);
             }
 
-            if (gamepad1.x && xControl)
-            {
+            if (gamepad1.x && xControl) {
                 slowmode = !slowmode;
             }
 
