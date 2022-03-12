@@ -3,23 +3,21 @@ package org.firstinspires.ftc.teamcode.autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorController;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.Range;
 
 
 //version 1 of team taro's autonomous code.
 
-@Autonomous(name="auton_v1", group="Linear OpMode")
+@Autonomous(name="auton_blue_en", group="Linear OpMode")
 
-public class auton_v1 extends LinearOpMode{
+public class blue_left extends LinearOpMode{
 
     private ElapsedTime runtime = new ElapsedTime();
 
-    private DcMotor fldrive, frdrive, bldrive, brdrive;
+    private DcMotor fldrive, frdrive, bldrive, brdrive, carousel;
 
+    double TICKS_PER_REV = 383.6, DIAM = 11.87374; // radius of wheels 2 in & ticks might be 28 or 383.6
+    int distance;
 
     public void runOpMode() throws InterruptedException {
         telemetry.addData("Status", "Intialized");
@@ -29,20 +27,91 @@ public class auton_v1 extends LinearOpMode{
         frdrive  = hardwareMap.get(DcMotor.class, "frdrive");
         brdrive = hardwareMap.get(DcMotor.class, "brdrive");
         bldrive = hardwareMap.get(DcMotor.class, "bldrive");
+        carousel = hardwareMap.get(DcMotor.class, "carousel");
 
-        fldrive.setDirection(DcMotor.Direction.FORWARD);
-        frdrive.setDirection(DcMotor.Direction.REVERSE);
-        brdrive.setDirection(DcMotor.Direction.REVERSE);
-        bldrive.setDirection(DcMotor.Direction.FORWARD);
+        fldrive.setDirection(DcMotor.Direction.REVERSE);
+        frdrive.setDirection(DcMotor.Direction.FORWARD);
+        brdrive.setDirection(DcMotor.Direction.FORWARD);
+        bldrive.setDirection(DcMotor.Direction.REVERSE);
+        carousel.setDirection(DcMotor.Direction.REVERSE);
 
         waitForStart();
         runtime.reset();
 
-        //write code here using functions
-        forward(0.1, 2000);
-        straferight(1, 3000);
+        // start robot facing towards blue alliance carousel
+        // next to barrier & LEFT of shipping hub
+
+        distance = 0; // distance forward
+        distance = (int)(distance*TICKS_PER_REV);
+        forward(0.7, distance);
+
+        carousel(0.7, 2000); // by time (negative if reverse direction)
+
+        distance = 0; // distance forward
+        distance = (int)(distance*TICKS_PER_REV);
+        strafeleft(0.7, distance);
+
     }
 
+    public void carousel(double power, long time) throws InterruptedException
+    {
+        carousel.setPower(power);
+        Thread.sleep(time);
+    }
+
+    public void forwardtime(double power, long time) throws InterruptedException
+    {
+        fldrive.setPower(power);
+        frdrive.setPower(power);
+        brdrive.setPower(power);
+        bldrive.setPower(power);
+        Thread.sleep(time);
+    }
+
+    public void backwardtime(double power, long time) throws InterruptedException
+    {
+        fldrive.setPower(-power);
+        frdrive.setPower(-power);
+        brdrive.setPower(-power);
+        bldrive.setPower(-power);
+        Thread.sleep(time);
+    }
+
+    public void lefttime(double power, long time) throws InterruptedException
+    {
+        fldrive.setPower(-power);
+        frdrive.setPower(power);
+        brdrive.setPower(power);
+        bldrive.setPower(-power);
+        Thread.sleep(time);
+    }
+
+    public void righttime(double power, long time) throws InterruptedException
+    {
+        fldrive.setPower(power);
+        frdrive.setPower(-power);
+        brdrive.setPower(-power);
+        bldrive.setPower(power);
+        Thread.sleep(time);
+    }
+
+    public void strafelefttime(double power, long time) throws InterruptedException
+    {
+        fldrive.setPower(-power);
+        frdrive.setPower(power);
+        brdrive.setPower(-power);
+        bldrive.setPower(power);
+        Thread.sleep(time);
+    }
+
+    public void straferighttime(double power, long time) throws InterruptedException
+    {
+        fldrive.setPower(power);
+        frdrive.setPower(-power);
+        brdrive.setPower(power);
+        bldrive.setPower(-power);
+        Thread.sleep(time);
+    }
 
     public void forward(double power, int distance) {
         fldrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

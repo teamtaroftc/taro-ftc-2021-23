@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -12,6 +12,7 @@ import com.qualcomm.robotcore.util.Range;
 // version 3 of taro's driver control code
 // basic drivetrain opmode w/ other components (& servo claw) and split gamepads
 
+// @Disabled
 @TeleOp(name="teleop_v3", group="Linear Opmode")
 public class teleop_v3 extends LinearOpMode
 {
@@ -29,7 +30,7 @@ public class teleop_v3 extends LinearOpMode
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-        //map the motor variables to actual motors
+        // map the motor variables to actual motors
         fldrive = hardwareMap.get(DcMotor.class, "fldrive");
         frdrive = hardwareMap.get(DcMotor.class, "frdrive");
         brdrive = hardwareMap.get(DcMotor.class, "brdrive");
@@ -39,14 +40,14 @@ public class teleop_v3 extends LinearOpMode
         clawServo = hardwareMap.servo.get("claw");
 
 
-        //set direction of motors
-        fldrive.setDirection(DcMotor.Direction.FORWARD);
-        frdrive.setDirection(DcMotor.Direction.REVERSE);
-        brdrive.setDirection(DcMotor.Direction.REVERSE);
-        bldrive.setDirection(DcMotor.Direction.FORWARD);
+        // set direction of motors
+        fldrive.setDirection(DcMotor.Direction.REVERSE);
+        frdrive.setDirection(DcMotor.Direction.FORWARD);
+        brdrive.setDirection(DcMotor.Direction.FORWARD);
+        bldrive.setDirection(DcMotor.Direction.REVERSE);
         lslides.setDirection(DcMotor.Direction.REVERSE);
 
-        // Wait for the game to start (driver presses PLAY)
+        // wait for the game to start (driver presses PLAY)
         waitForStart();
         runtime.reset();
 

@@ -26,7 +26,7 @@ public class teleop_v2 extends LinearOpMode
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-        //map the motor variables to actual motors
+        // map the motor variables to actual motors
         fldrive = hardwareMap.get(DcMotor.class, "fldrive");
         frdrive = hardwareMap.get(DcMotor.class, "frdrive");
         brdrive = hardwareMap.get(DcMotor.class, "brdrive");
@@ -34,14 +34,14 @@ public class teleop_v2 extends LinearOpMode
         lslides = hardwareMap.get(DcMotor.class, "lslides");
         carousel = hardwareMap.get(DcMotor.class, "carousel");
 
-        //set direction of motors
-        fldrive.setDirection(DcMotor.Direction.FORWARD);
-        frdrive.setDirection(DcMotor.Direction.REVERSE);
-        brdrive.setDirection(DcMotor.Direction.REVERSE);
-        bldrive.setDirection(DcMotor.Direction.FORWARD);
-        lslides.setDirection(DcMotor.Direction.FORWARD);
+        // set direction of motors
+        fldrive.setDirection(DcMotor.Direction.REVERSE);
+        frdrive.setDirection(DcMotor.Direction.FORWARD);
+        brdrive.setDirection(DcMotor.Direction.FORWARD);
+        bldrive.setDirection(DcMotor.Direction.REVERSE);
+        lslides.setDirection(DcMotor.Direction.REVERSE);
 
-        // Wait for the game to start (driver presses PLAY)
+        // wait for the game to start (driver presses PLAY)
         waitForStart();
         runtime.reset();
 
