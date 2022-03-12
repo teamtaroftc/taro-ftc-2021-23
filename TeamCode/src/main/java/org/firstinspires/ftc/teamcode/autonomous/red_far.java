@@ -8,9 +8,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 //version 1 of team taro's autonomous code.
 
-@Autonomous(name="blue_right", group="Linear OpMode")
+@Autonomous(name="red_far", group="Linear OpMode")
 
-public class blue_right extends LinearOpMode{
+public class red_far extends LinearOpMode{
 
     private ElapsedTime runtime = new ElapsedTime();
 
@@ -18,6 +18,8 @@ public class blue_right extends LinearOpMode{
 
     double TICKS_PER_REV = 383.6, DIAM = 11.87374; // radius of wheels 2 in & ticks might be 28 or 383.6
     int distance;
+
+    @Override
 
     public void runOpMode() throws InterruptedException {
         telemetry.addData("Status", "Intialized");
@@ -38,18 +40,20 @@ public class blue_right extends LinearOpMode{
         waitForStart();
         runtime.reset();
 
-        // start robot facing towards blue alliance carousel
+        // start robot facing towards red alliance carousel
         // next to barrier & LEFT of shipping hub
 
-        distance = 0; // distance forward
+        distance = 60; // distance forward
         distance = (int)(distance*TICKS_PER_REV);
         forward(0.7, distance);
+        lefttime(0.2, 400);
 
         carousel(0.7, 2000); // by time (negative if reverse direction)
 
-        distance = 0; // distance left
+        righttime(0.2,400);
+        distance = 32; // distance right
         distance = (int)(distance*TICKS_PER_REV);
-        strafeleft(0.7, distance);
+        straferight(0.7, distance);
 
     }
 

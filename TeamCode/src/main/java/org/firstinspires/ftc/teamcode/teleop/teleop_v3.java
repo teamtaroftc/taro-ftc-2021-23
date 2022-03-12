@@ -59,7 +59,7 @@ public class teleop_v3 extends LinearOpMode
 
         while (opModeIsActive())
         {
-            double speed = gamepad1.left_stick_y;
+            double speed = -gamepad1.left_stick_y;
             double turn = -gamepad1.right_stick_x;
             double strafe = -gamepad1.left_stick_x;
             // double lsfor = gamepad2.right_trigger;
@@ -100,7 +100,7 @@ public class teleop_v3 extends LinearOpMode
             if (gamepad2.a && clawPosition > MIN_POSITION) clawPosition -= .01;
             if (gamepad2.b && clawPosition < MAX_POSITION) clawPosition += .01;
 
-            // clawServo.setPosition(Range.clip(clawPosition, MIN_POSITION, MAX_POSITION));
+            clawServo.setPosition(Range.clip(clawPosition, MIN_POSITION, MAX_POSITION));
             clawServo.setPosition(clawPosition);
 
             xControl = !gamepad1.x;
@@ -110,8 +110,8 @@ public class teleop_v3 extends LinearOpMode
             telemetry.addData("frdrive",Double.toString(frdrive.getPower()));
             telemetry.addData("brdrive",Double.toString(brdrive.getPower()));
             telemetry.addData("bldrive",Double.toString(bldrive.getPower()));
-            telemetry.addData("claw position",Double.toString(clawServo.getPosition()));
-            telemetry.addData("claw position",Double.toString(clawPosition));
+            // telemetry.addData("claw position",Double.toString(clawServo.getPosition()));
+            // telemetry.addData("claw position",Double.toString(clawPosition));
 
             telemetry.update();
         }

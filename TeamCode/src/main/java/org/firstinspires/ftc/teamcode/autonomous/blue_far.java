@@ -8,9 +8,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 //version 1 of team taro's autonomous code.
 
-@Autonomous(name="red_left", group="Linear OpMode")
+@Autonomous(name="blue_far", group="Linear OpMode")
 
-public class red_left extends LinearOpMode{
+public class blue_far extends LinearOpMode{
 
     private ElapsedTime runtime = new ElapsedTime();
 
@@ -38,18 +38,18 @@ public class red_left extends LinearOpMode{
         waitForStart();
         runtime.reset();
 
-        // start robot facing towards red alliance carousel
+        // start robot facing towards blue alliance carousel
         // next to barrier & LEFT of shipping hub
 
-        distance = 0; // distance forward
+        distance = 60; // distance forward
         distance = (int)(distance*TICKS_PER_REV);
         forward(0.7, distance);
 
         carousel(0.7, 2000); // by time (negative if reverse direction)
 
-        distance = 0; // distance right
+        distance = 32; // distance left
         distance = (int)(distance*TICKS_PER_REV);
-        straferight(0.7, distance);
+        strafeleft(0.7, distance);
 
     }
 
