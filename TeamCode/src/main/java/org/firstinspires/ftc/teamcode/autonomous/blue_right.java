@@ -47,7 +47,7 @@ public class blue_right extends LinearOpMode{
 
         carousel(0.7, 2000); // by time (negative if reverse direction)
 
-        distance = 0; // distance forward
+        distance = 0; // distance left
         distance = (int)(distance*TICKS_PER_REV);
         strafeleft(0.7, distance);
 
