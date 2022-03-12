@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 //version 1 of team taro's autonomous code.
 
-@Autonomous(name="auton_blue_en", group="Linear OpMode")
+@Autonomous(name="blue_left", group="Linear OpMode")
 
 public class blue_left extends LinearOpMode{
 

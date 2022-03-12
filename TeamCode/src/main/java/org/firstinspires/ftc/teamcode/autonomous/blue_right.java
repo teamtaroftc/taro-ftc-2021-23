@@ -3,23 +3,21 @@ package org.firstinspires.ftc.teamcode.autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorController;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.Range;
 
 
 //version 1 of team taro's autonomous code.
 
-@Autonomous(name="auton_blue", group="Linear OpMode")
+@Autonomous(name="blue_right", group="Linear OpMode")
 
-public class auton_blue extends LinearOpMode{
+public class blue_right extends LinearOpMode{
 
     private ElapsedTime runtime = new ElapsedTime();
 
     private DcMotor fldrive, frdrive, bldrive, brdrive, carousel;
 
+    double TICKS_PER_REV = 383.6, DIAM = 11.87374; // radius of wheels 2 in & ticks might be 28 or 383.6
+    int distance;
 
     public void runOpMode() throws InterruptedException {
         telemetry.addData("Status", "Intialized");
@@ -31,23 +29,27 @@ public class auton_blue extends LinearOpMode{
         bldrive = hardwareMap.get(DcMotor.class, "bldrive");
         carousel = hardwareMap.get(DcMotor.class, "carousel");
 
-        fldrive.setDirection(DcMotor.Direction.FORWARD);
-        frdrive.setDirection(DcMotor.Direction.REVERSE);
-        brdrive.setDirection(DcMotor.Direction.REVERSE);
-        bldrive.setDirection(DcMotor.Direction.FORWARD);
+        fldrive.setDirection(DcMotor.Direction.REVERSE);
+        frdrive.setDirection(DcMotor.Direction.FORWARD);
+        brdrive.setDirection(DcMotor.Direction.FORWARD);
+        bldrive.setDirection(DcMotor.Direction.REVERSE);
         carousel.setDirection(DcMotor.Direction.REVERSE);
 
         waitForStart();
         runtime.reset();
 
-        //write code here using functions
-        //forward(0.1, 2000);
-        //straferight(1, 3000);
+        // start robot facing towards blue alliance carousel
+        // next to barrier & LEFT of shipping hub
 
-        straferighttime(0.5, 300);
-        righttime(0.1, 200);
-        carousel(0.5, 2000);
-        forwardtime(0.3, 4000);
+        distance = 0; // distance forward
+        distance = (int)(distance*TICKS_PER_REV);
+        forward(0.7, distance);
+
+        carousel(0.7, 2000); // by time (negative if reverse direction)
+
+        distance = 0; // distance forward
+        distance = (int)(distance*TICKS_PER_REV);
+        strafeleft(0.7, distance);
 
     }
 
