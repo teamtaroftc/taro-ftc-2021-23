@@ -8,9 +8,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 //version 1 of team taro's autonomous code.
 
-@Autonomous(name="red_left", group="Linear OpMode")
+@Autonomous(name="red_right", group="Linear OpMode")
 
-public class red_left extends LinearOpMode{
+public class red_right extends LinearOpMode{
 
     private ElapsedTime runtime = new ElapsedTime();
 
