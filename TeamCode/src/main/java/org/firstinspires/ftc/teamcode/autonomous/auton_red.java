@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
@@ -12,6 +13,7 @@ import com.qualcomm.robotcore.util.Range;
 
 //version 1 of team taro's autonomous code.
 
+@Disabled
 @Autonomous(name="auton_red", group="Linear OpMode")
 
 public class auton_red extends LinearOpMode{
