@@ -1,4 +1,4 @@
-/* package org.firstinspires.ftc.teamcode.hardwaremap;
+package org.firstinspires.ftc.teamcode.hardwaremap;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -61,4 +61,3 @@ public class hardwaremap {
         }
     }
 }
-*/
