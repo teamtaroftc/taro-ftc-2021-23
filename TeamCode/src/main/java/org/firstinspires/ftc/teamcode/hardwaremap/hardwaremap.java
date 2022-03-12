@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.hardwaremap;
+/* package org.firstinspires.ftc.teamcode.hardwaremap;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -47,6 +47,18 @@ public class hardwaremap {
             bldrive.setDirection(DcMotor.Direction.FORWARD);
             lslides.setDirection(DcMotor.Direction.FORWARD);
             carousel.setDirection(DcMotor.Direction.FORWARD);
+
+            // Set motor mode for encoder use
+            fldrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            frdrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            bldrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            brdrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+            fldrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            frdrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            bldrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            brdrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         }
     }
 }
+*/

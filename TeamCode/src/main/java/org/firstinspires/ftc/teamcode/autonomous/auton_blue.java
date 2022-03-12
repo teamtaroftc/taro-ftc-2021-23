@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.autonomous;
+/* package org.firstinspires.ftc.teamcode.autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -275,10 +275,10 @@ public class auton_blue extends LinearOpMode{
         bldrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         brdrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        fldrive.setTargetPosition(distance);
+        fldrive.setTargetPosition(distance);ce);
         frdrive.setTargetPosition(-distance);
         bldrive.setTargetPosition(distance);
-        brdrive.setTargetPosition(-distance);
+        brdrive.setTargetPosition(-distance);ce);
 
         fldrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         frdrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -301,3 +301,4 @@ public class auton_blue extends LinearOpMode{
         bldrive.setPower(power);
     }
 }
+*/
