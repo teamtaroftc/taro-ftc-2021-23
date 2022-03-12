@@ -1,13 +1,14 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
 //version 1 of team taro's autonomous code.
-
+@Disabled
 @Autonomous(name="basic_auton", group="Linear OpMode")
 
 public class basic_auton extends LinearOpMode{
