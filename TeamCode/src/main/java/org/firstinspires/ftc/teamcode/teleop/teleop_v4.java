@@ -41,11 +41,11 @@ public class teleop_v4 extends LinearOpMode
 
 
         // set direction of motors
-        fldrive.setDirection(DcMotor.Direction.REVERSE);
-        frdrive.setDirection(DcMotor.Direction.FORWARD);
-        brdrive.setDirection(DcMotor.Direction.FORWARD);
-        bldrive.setDirection(DcMotor.Direction.REVERSE);
-        lslides.setDirection(DcMotor.Direction.REVERSE);
+        fldrive.setDirection(DcMotor.Direction.FORWARD);
+        frdrive.setDirection(DcMotor.Direction.REVERSE);
+        brdrive.setDirection(DcMotor.Direction.REVERSE);
+        bldrive.setDirection(DcMotor.Direction.FORWARD);
+        lslides.setDirection(DcMotor.Direction.FORWARD);
 
         // wait for the game to start (driver presses PLAY)
         waitForStart();

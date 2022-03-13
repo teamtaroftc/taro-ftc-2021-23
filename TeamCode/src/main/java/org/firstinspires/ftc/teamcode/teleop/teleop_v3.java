@@ -45,7 +45,7 @@ public class teleop_v3 extends LinearOpMode
         frdrive.setDirection(DcMotor.Direction.FORWARD);
         brdrive.setDirection(DcMotor.Direction.FORWARD);
         bldrive.setDirection(DcMotor.Direction.REVERSE);
-        lslides.setDirection(DcMotor.Direction.REVERSE);
+        lslides.setDirection(DcMotor.Direction.FORWARD);
 
         // wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -59,9 +59,9 @@ public class teleop_v3 extends LinearOpMode
 
         while (opModeIsActive())
         {
-            double speed = -gamepad1.left_stick_y;
-            double turn = -gamepad1.right_stick_x;
-            double strafe = -gamepad1.left_stick_x;
+            double speed = gamepad1.left_stick_y;
+            double turn = gamepad1.right_stick_x;
+            double strafe = gamepad1.left_stick_x;
             // double lsfor = gamepad2.right_trigger;
             // double lsback = gamepad2.left_trigger;
             double ls = gamepad2.left_stick_y;
