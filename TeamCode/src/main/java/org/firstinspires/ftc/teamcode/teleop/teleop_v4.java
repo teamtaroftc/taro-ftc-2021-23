@@ -13,8 +13,8 @@ import com.qualcomm.robotcore.util.Range;
 // basic drivetrain opmode w/ other components (& servo claw) and split gamepads
 
 // @Disabled
-@TeleOp(name="teleop_v3", group="Linear Opmode")
-public class teleop_v3 extends LinearOpMode
+@TeleOp(name="teleop_v4", group="Linear Opmode")
+public class teleop_v4 extends LinearOpMode
 {
     private ElapsedTime runtime = new ElapsedTime();
 
@@ -84,7 +84,7 @@ public class teleop_v3 extends LinearOpMode
                 ls /= 5;
             }
 
-            // set power to motors with range of -1 to 1
+            //set power to motors with range of -1 to 1
             fldrive.setPower(Range.clip(fl, -1.0, 1.0));
             frdrive.setPower(Range.clip(fr, -1.0, 1.0));
             brdrive.setPower(Range.clip(br, -1.0, 1.0));
@@ -110,7 +110,7 @@ public class teleop_v3 extends LinearOpMode
             telemetry.addData("frdrive",Double.toString(frdrive.getPower()));
             telemetry.addData("brdrive",Double.toString(brdrive.getPower()));
             telemetry.addData("bldrive",Double.toString(bldrive.getPower()));
-            telemetry.addData("claw position",Double.toString(clawServo.getPosition()));
+            // telemetry.addData("claw position",Double.toString(clawServo.getPosition()));
             // telemetry.addData("claw position",Double.toString(clawPosition));
 
             telemetry.update();
